@@ -1,0 +1,2 @@
+#!/bin/bash
+1tail -10 5-firstlines
