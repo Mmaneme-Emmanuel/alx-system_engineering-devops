@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # Check if script is running inside Docker
+#localhost resolves to 127.0.0.2
+#tfacebook.com resolves to 8.8.8.8.
+
 if [ -f "/.dockerenv" ]; then
   HOSTS_FILE="/etc/hosts"
 else
