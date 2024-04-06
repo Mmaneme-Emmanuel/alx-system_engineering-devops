@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+server_address=54.173.45.216
+
+# SSH connection using the private key ~/.ssh/school with the user ubuntu
+ssh -i ~/.ssh/school ubuntu@54.173.45.216
