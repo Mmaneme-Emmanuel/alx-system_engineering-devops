@@ -1,48 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#find out what’s keeping your Ubuntu container’s Nginx installation 
+#from listening on port 80
 
-# Update package lists
-apt-get update
+# Remove the default configuration file
+rm /etc/nginx/sites-available/default
 
-# Install Nginx
-apt-get install nginx -y
+# Create a symbolic link to enable the default configuration
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-# Check Nginx service status
-nginx_status=$(systemctl status nginx | grep Active)
-if [[ $nginx_status == *"active (running)"* ]]; then
-    echo "Nginx service is running."
-else
-    echo "Nginx service is not running. Starting Nginx..."
-    systemctl start nginx
-fi
-
-# Check Nginx configuration for port 80
-nginx_config=$(grep "listen 80" /etc/nginx/sites-available/default)
-if [[ -z $nginx_config ]]; then
-    echo "Nginx is not configured to listen on port 80. Fixing..."
-    sed -i 's/listen 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
-    systemctl restart nginx
-    echo "Nginx configuration updated to listen on port 80."
-else
-    echo "Nginx is already configured to listen on port 80."
-fi
-
-# Check for conflicting services on port 80
-conflicting_services=$(netstat -tuln | grep ":80 ")
-if [[ -n $conflicting_services ]]; then
-    echo "There are conflicting services running on port 80:"
-    echo "$conflicting_services"
-else
-    echo "No conflicting services found on port 80."
-fi
-
-# Check firewall settings
-firewall_status=$(ufw status | grep "80/tcp")
-if [[ $firewall_status == *"ALLOW"* ]]; then
-    echo "Port 80 is allowed in the firewall."
-else
-    echo "Port 80 is not allowed in the firewall. Allowing port 80..."
-    ufw allow 80/tcp
-    echo "Port 80 allowed in the firewall."
-fi
-
-echo "Debugging and configuration completed."
+# Restart the Nginx service
+service nginx restart
