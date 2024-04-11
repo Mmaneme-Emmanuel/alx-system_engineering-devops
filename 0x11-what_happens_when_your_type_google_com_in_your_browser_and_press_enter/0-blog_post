@@ -1,0 +1,29 @@
+Title: Behind the Curtain: UNVEILING THE WEB STACK WITH A VISIT TO GOOGLE
+
+Have you ever stopped to ponder what happens when you type "https://www.google.com" into your browser's address bar? While the act might seem simple, the journey your request embarks on is a complex orchestration of various components working seamlessly together. Let's take a deep dive into the web stack and unravel the magic behind the scenes, using a visit to Google as our focal point.
+
+1. DNS Request:
+As you eagerly type "https://www.google.com" and hit enter, the process kicks off with a DNS (Domain Name System) request. Your browser seeks out the IP address associated with the Google domain, translating the human-readable address into a machine-readable format, facilitating connection to the Google server.
+
+2. TCP/IP:
+With the IP address in hand, your browser initiates a TCP/IP (Transmission Control Protocol/Internet Protocol) connection. TCP ensures the reliable transmission of data, while IP handles the addressing and routing across the internet, ensuring that the data packets reach their destination—the Google server—in the correct order.
+
+3. Firewall:
+As your data packets traverse the vast expanse of the internet, they may encounter firewalls, gatekeepers ensuring the safety and integrity of the network. These vigilant guardians filter out malicious threats while permitting legitimate traffic, such as your request to connect to Google's server, to pass through unscathed.
+
+4. HTTPS/SSL:
+Google, like many websites committed to safeguarding user data, employs HTTPS (Hypertext Transfer Protocol Secure) encryption, fortified by SSL/TLS (Secure Sockets Layer/Transport Layer Security) protocols. This cryptographic shield ensures that your interactions with Google remain private and secure, shielding sensitive information from prying eyes.
+
+5. Load-Balancer:
+Behind the scenes, Google harnesses the power of load balancers to manage incoming traffic efficiently. These digital traffic conductors distribute requests across multiple servers, ensuring optimal performance and preventing overload even amidst surges in demand.
+
+6. Web Server:
+Upon reaching one of Google's web servers, your request for the Google homepage or search results is swiftly fulfilled. The web server retrieves the requested data from its vast repository and processes any dynamic content before packaging it into a neat HTML response ready for delivery to your browser.
+
+7. Application Server:
+Google's arsenal includes application servers that handle more intricate tasks beyond serving static web content. These servers execute complex algorithms for tasks like search indexing, language translation, and personalized recommendations, enhancing your browsing experience with every click.
+
+8. Database:
+Fueling Google's formidable capabilities is its intricate network of databases. These repositories store vast troves of data, ranging from indexed web pages to user preferences, enabling lightning-fast retrieval and processing of information, all in the blink of an eye.
+
+In essence, as you embark on your digital journey with a simple keystroke, the web stack springs into action, orchestrating a symphony of technology to deliver a seamless browsing experience. So, the next time you marvel at the speed and efficiency of Google's search results, remember the intricate dance of the web stack powering every query and click. Happy Googling!
