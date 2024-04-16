@@ -1,34 +1,34 @@
 #!/usr/bin/env bash
-#Configure Nginx so that its HTTP response contains a custom header (on web-01 and web-02
-# Update package index
-sudo apt-get update
-
-# Install Nginx
-sudo apt-get install nginx -y
-
-# Allow Nginx HTTP traffic
+# configure web-02 to be identical to web-01
+# The name of the custom HTTP header must be X-Served-By
+# The value of the custom HTTP header must be the hostname of the server Nginx is running on
+#sudo sed -i 's/server_name _;.*/server_name _;\n\tadd_header X-Served-By \$hostname;/' /etc/nginx/sites-enabled/default 
+sudo apt-get -y update
+sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
+sudo mkdir -p /var/www/html /var/www/error
+sudo chmod -R 755 /var/www
+echo 'Hello World!' > /var/www/html/index.html
+echo "error" > /var/www/html/404.html
+server_config=\
+"server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	add_header X-Served-By \$hostname;
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+	if (\$request_filename ~ redirect_me){
+		rewrite ^ https://youtube.com permanent;
+	}
+	error_page 404 /404.html;
+	location = /404.html {
+		internal;
+	}
+}"
 
-# Set default page content
-echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
-# Configure redirection
-sudo tee /etc/nginx/sites-available/redirect.conf > /dev/null <<EOT
-server {
-listen 80 default_server;
-location /redirect_me {
-return 301 https://www.youtube.com/;
-    }
-}
-EOT
-
-# Enable the redirection configuration
-sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
-
-# Create custom 404 page
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
-
-# Configure 404 error handling
-sudo sed -i '/^http {/a \    add_header X-Served-By "$HOSTNAME";' /etc/nginx/nginx.conf
-
-# Restart Nginx service
-sudo systemctl restart nginx
+echo "$server_config" > /etc/nginx/sites-enabled/default
+sudo service nginx restart
