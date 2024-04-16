@@ -11,13 +11,12 @@ sudo ufw allow 'Nginx HTTP'
 
 # Set default page content
 echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
-
 # Configure redirection
 sudo tee /etc/nginx/sites-available/redirect.conf > /dev/null <<EOT
 server {
-    listen 80 default_server;
-    location /redirect_me {
-        return 301 https://www.youtube.com/;
+listen 80 default_server;
+location /redirect_me {
+return 301 https://www.youtube.com/;
     }
 }
 EOT
