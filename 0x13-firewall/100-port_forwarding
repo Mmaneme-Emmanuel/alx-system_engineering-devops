@@ -1,0 +1,30 @@
+echo -e "Updating\n"
+
+sudo apt-get update
+
+echo -e "Installing UFW\n"
+
+sudo apt-get install -y ufw
+
+echo -e "configuring UFW...\n"
+
+# Allow Outgoing and Deny Incoming
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Allow ports
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+
+# Redirect port 8080 to port 80
+sudo bash -c 'echo "# Redirect port 8080 to port 80" >> /etc/ufw/before.rules'
+sudo bash -c 'echo "*nat" >> /etc/ufw/before.rules'
+sudo bash -c 'echo ":PREROUTING ACCEPT [0:0]" >> /etc/ufw/before.rules'
+sudo bash -c 'echo "-A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 80" >> /etc/ufw/before.rules'
+sudo bash -c 'echo "COMMIT" >> /etc/ufw/before.rules'
+
+# Enable Fire Wall
+sudo ufw enable
+
+echo -e "Process Completed.\n"
