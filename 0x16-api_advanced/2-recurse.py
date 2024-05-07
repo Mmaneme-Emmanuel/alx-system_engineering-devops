@@ -36,7 +36,6 @@ def recurse(subreddit, hot_list=[], after="", count=0):
         "count": count,
         "limit": 100
     }
-
     # Send a GET request to the subreddit's hot posts page
     response = requests.get(url, headers=headers, params=params,
                             allow_redirects=False)
