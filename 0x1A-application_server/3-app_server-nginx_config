@@ -3,7 +3,7 @@ server {
     listen [::]:80 default_server;
 
     # I am using my IP as domain name
-    server_name 54.173.45.216
+    server_name 54.173.45.216;
 
     # Customizing my HTTP header
     add_header X-Served-By 516208-web-01;
@@ -13,9 +13,9 @@ server {
         proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
     }
 
-    # Serve /number_odd_or_even/ route on AirBnB_clone_v2
-    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
-        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+    location /airbnb-dynamic/number_odd_or_even/ {
+        rewrite /airbnb-dynamic/(.*) $1 break;
+        proxy_pass http://localhost:5001/number_odd_or_even;
     }
 
     error_page 404 /404.html;
