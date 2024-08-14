@@ -27,7 +27,7 @@ def count_words(subreddit, word_list, after=None, counts={}):
 
     if response.status_code != 200:
         return
-data = response.json()
+    data = response.json()
     children = data["data"]["children"]
 
     for post in children:
