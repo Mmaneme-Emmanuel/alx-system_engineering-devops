@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 0x18. Webstack monitoring
 
 Resources
