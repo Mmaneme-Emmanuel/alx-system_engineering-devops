@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""get data from api"""
+"""Script that gets a given employee ID and return his TODO list progress."""
 
 import requests
 from sys import argv
