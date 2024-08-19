@@ -35,7 +35,7 @@ def get_employee_todos_progress(employee_id):
             writer = csv.writer(file, quoting=csv.QUOTE_ALL)
             for task in json_todos_list:
                 writer.writerow([employee_id, employee_name, task["completed"],
-                                task["title"]])
+                                 task["title"]])
 
     except Exception as e:
         print(f"An error occurred: {e}")
