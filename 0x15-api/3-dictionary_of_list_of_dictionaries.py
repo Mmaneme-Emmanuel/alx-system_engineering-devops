@@ -1,46 +1,47 @@
 #!/usr/bin/python3
-"""Script that gets a given employee ID and return his TODO list progress."""
+"""Script that gets all employees and returns their TODO list progress."""
 
 import json
 import requests
-from sys import argv
-"""the module for this project """
+"""module for the task"""
 
 
-def get_employee_todos_progress(employee_id):
-    """ A function to return the info about a particular employee """
+def get_employee_tasks():
+    """A function to return the info about all employees."""
     try:
         url = "https://jsonplaceholder.typicode.com/"
-        user_datas = requests.get(url + f"users/{employee_id}")
-        user_data = user_datas.json()
-        employee_name = user_data['name']
+        user_response = requests.get(url + "users")
+        user_data = user_response.json()
 
-        """ Getting the todo list for the employee """
-        todos_list = requests.get(url + f"todos?userId={employee_id}")
-        json_todos_list = todos_list.json()
+        """ Getting the all employee data in dictionary """
+        all_employee_data = {}
+        for user in user_data:
+            employee_id = user['id']
+            employee_name = user['username']
 
-        """ Prepare data to export """
-        tasks = [
+            """This is for getting todos"""
+            todos_response = requests.get(url + f"todos?userId={employee_id}")
+            todos_list = todos_response.json()
+
+            """ Prepare data to export """
+            tasks = [
                 {
+                    'username': employee_name,
                     "task": task['title'],
-                    "completed": task['completed'],
-                    "username": employee_name
-                    }
-                for task in json_todos_list
-                ]
-
-        data_to_export = {str(employee_id): tasks}
+                    "completed": task['completed']
+                }
+                for task in todos_list
+            ]
+            all_employee_data[str(employee_id)] = tasks
 
         """ Save to a JSON file """
-        with open(f"{employee_id}.json", 'w') as json_file:
-            json.dump(data_to_export, json_file, indent=4)
+        json_filename = 'todos_all_employee.json'
+        with open(json_filename, mode='w') as json_file:
+            json.dump(all_employee_data, json_file, indent=4)
 
     except Exception as e:
         print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
-    if len(argv) != 2:
-        print("Usage: script <employee_id>")
-    else:
-        get_employee_todos_progress(argv[1])
+    get_employee_tasks()
