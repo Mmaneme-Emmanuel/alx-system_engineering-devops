@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Script that gets a given employee ID and return his TODO list progress."""
 
-import requests
 import json
+import requests
 from sys import argv
 """the module for this project """
 
@@ -21,20 +21,19 @@ def get_employee_todos_progress(employee_id):
 
         """ Prepare data to export """
         tasks = [
-            {
-                "task": task['title'],
-                "completed": task['completed'],
-                "username": employee_name
-            } for task in json_todos_list
-        ]
+                {
+                    "task": task['title'],
+                    "completed": task['completed'],
+                    "username": employee_name
+                    }
+                for task in json_todos_list
+                ]
 
         data_to_export = {str(employee_id): tasks}
 
         """ Save to a JSON file """
         with open(f"{employee_id}.json", 'w') as json_file:
             json.dump(data_to_export, json_file, indent=4)
-
-        print(f"Data exported to {employee_id}.json")
 
     except Exception as e:
         print(f"An error occurred: {e}")
