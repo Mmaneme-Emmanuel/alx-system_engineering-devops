@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+"""get data from api"""
+
 import requests
 from sys import argv
 
 
-def fetch_employee_todos(employee_id):
+def get_employee_todos_progress(employee_id):
     try:
         url = "https://jsonplaceholder.typicode.com/"
         user_datas = requests.get(url + f"users/{employee_id}")
@@ -33,4 +35,4 @@ if __name__ == "__main__":
     if len(argv) != 2:
         print("usage: Script <employee_id>")
     else:
-        fetch_employee_todos(argv[1])
+        get_employee_todos_progress(argv[1])
