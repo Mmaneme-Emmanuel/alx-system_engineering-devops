@@ -2,8 +2,9 @@
 import requests
 import sys
 
-# Get the employee ID from command-line arguments
-employee_id = sys.argv[1]
+if __name__ == "__main__":
+    # Get the employee ID from command-line arguments
+    employee_id = sys.argv[1]
 
 # Fetch employee details
 url = "https://jsonplaceholder.typicode.com/"  # Assuming this is the base URL
