@@ -3,9 +3,11 @@
 
 import requests
 from sys import argv
+"""Above is the module to work with"""
 
 
 def get_employee_todos_progress(employee_id):
+    """ a function to return the info about a particular employee"""
     try:
         url = "https://jsonplaceholder.typicode.com/"
         user_datas = requests.get(url + f"users/{employee_id}")
@@ -21,7 +23,7 @@ def get_employee_todos_progress(employee_id):
                      if task["completed"]]
         num_of_task_done = len(task_done)
 
-        # Print the result
+        """ Print the result """
         print(f"Employee {employee_name} is done with task("
               f"{num_of_task_done}/{total_task}):")
 
@@ -33,6 +35,6 @@ def get_employee_todos_progress(employee_id):
 
 if __name__ == "__main__":
     if len(argv) != 2:
-        print("usage: Script <employee_id>")
+        print("Usage: Script <employee_id>")
     else:
         get_employee_todos_progress(argv[1])
