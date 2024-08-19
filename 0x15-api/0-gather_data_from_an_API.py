@@ -4,21 +4,29 @@ from sys import argv
 
 
 def fetch_employee_todos(employee_id):
-    url = "https://jsonplaceholder.typicode.com/"
-    response = requests.get(url + "users/{}".format(employee_id))
-    employee = response.json()
+    try:
+        url = "https://jsonplaceholder.typicode.com/"
+        user_info = requests.get(url + f"users/{employee_id}")
+        response = user_info.json()
+        employee_name = response["name"]
 
-    todo_response = requests.get(url + "todos?userId={}".format(employee_id))
-    todos = todo_response.json()
+        """getting the todolist for the employee"""
+        todo_list = requests.get(url + f"todos?userId={employee_id}")
+        json_converted_todos = todo_list.json()
 
-    completed = [todo for todo in todos if todo.get("completed")]
+        total_task = (json_converted_todos)
+        task_done = [task for task in json_converted_todos
+                     if task["completed"]]
+        num_of_task_done = len(task_done)
 
-    # Print the result
-    print("{} is done with {}/{}".format(employee['name'],
-          len(completed), len(todos)))
+        # Print the result
+        print(f"Employee {employee_name} is done with task",
+              f"{num_of_task_done}/{task_done}:")
 
-    for task in completed:
-        print("\t {}".format(task['title']))
+        for task in task_done:
+            print(f"\t {task['title']}")
+    except Exception as e:
+        print(f"an error occured {e}")
 
 
 if __name__ == "__main__":
