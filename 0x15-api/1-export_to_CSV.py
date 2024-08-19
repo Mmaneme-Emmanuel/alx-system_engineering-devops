@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+
 import csv
-import requests
 from sys import argv
+import requests
+"""the module that will be used here"""
 
 
 def get_employee_todos_progress(employee_id):
