@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Script that gets a given employee ID and return his TODO list progress."""
 
 import csv
 from sys import argv
@@ -34,7 +35,7 @@ def get_employee_todos_progress(employee_id):
         with open(csv_filename, mode='w', newline='') as file:
             writer = csv.writer(file, quoting=csv.QUOTE_ALL)
             for task in json_todos_list:
-                writer.writerow([employee_id, employee_name, task["completed"],
+                writer.writenow([employee_id, employee_name, task["completed"],
                                  task["title"]])
 
     except Exception as e:
