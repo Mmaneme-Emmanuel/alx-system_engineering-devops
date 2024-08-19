@@ -12,19 +12,19 @@ def get_employee_todos_progress(employee_id):
         url = "https://jsonplaceholder.typicode.com/"
         user_datas = requests.get(url + f"users/{employee_id}")
         user_data = user_datas.json()
-        employee_name = user_data["name"]
+        employee_name = user_data['name']
 
         """getting the todolist for the employee"""
-        todo_list = requests.get(url + f"todos?userId={employee_id}")
-        json_converted_todos = todo_list.json()
+        todos_list = requests.get(url + f"todos?userId={employee_id}")
+        json_todos_list = todos_list.json()
 
-        total_task = len(json_converted_todos)
-        task_done = [task for task in json_converted_todos
+        total_task = len(json_todos_list)
+        task_done = [task for task in json_todos_list
                      if task["completed"]]
         num_of_task_done = len(task_done)
 
         """ Print the result """
-        print(f"Employee {employee_name} is done with task("
+        print(f"Employee {employee_name} is done with tasks("
               f"{num_of_task_done}/{total_task}):")
 
         for task in task_done:
