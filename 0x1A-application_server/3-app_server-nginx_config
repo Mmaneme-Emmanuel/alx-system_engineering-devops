@@ -1,5 +1,15 @@
-# Kill proccess called killmenow
+# configure Nginx proccess
+#!/bin/bash
 
-exec { 'kill':
-  command => '/usr/bin/pkill killmenow'
-}
+# Update package lists and install Nginx
+if command -v apt &> /dev/null
+then
+    sudo apt update
+    sudo apt install -y nginx
+elif command -v yum &> /dev/null
+then
+    sudo yum install -y nginx
+else
+    echo "Unsupported package manager. Exiting."
+    exit 1
+fi
