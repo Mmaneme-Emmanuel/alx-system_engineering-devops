@@ -1,0 +1,107 @@
+[34m
+* Datadog Agent install script v1.13.0
+[0m
+[34m
+* Installing apt-transport-https, curl and gnupg
+[0m
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 https://ppa.launchpadcontent.net/vbernat/haproxy-2.4/ubuntu jammy InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:5 https://ppa.launchpadcontent.net/vbernat/haproxy-2.8/ubuntu jammy InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:7 https://deb.nodesource.com/node_16.x nodistro InRelease
+Ign:8 https://apt.datadoghq.com stable InRelease
+Hit:9 https://apt.datadoghq.com stable Release
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gnupg is already the newest version (2.2.27-3ubuntu2.1).
+apt-transport-https is already the newest version (2.4.12).
+The following additional packages will be installed:
+  libcurl4
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 0 newly installed, 0 to remove and 44 not upgraded.
+Need to get 484 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.17 [194 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.17 [290 kB]
+Fetched 484 kB in 3s (168 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 67156 files and directories currently installed.)
+Preparing to unpack .../curl_7.81.0-1ubuntu1.17_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.17) over (7.81.0-1ubuntu1.16) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.17_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.17) over (7.81.0-1ubuntu1.16) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.17) ...
+Setting up curl (7.81.0-1ubuntu1.17) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+[34m
+* Installing APT package sources for Datadog
+[0m
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0100  1713  100  1713    0     0    629      0  0:00:02  0:00:02 --:--:--   629
+gpg: key E6266D4AC0962C7D: "Datadog, Inc. APT key (2023-04-20) (APT key) <package+aptkey@datadoghq.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0100  6226  100  6226    0     0   3686      0  0:00:01  0:00:01 --:--:--  3692
+gpg: key 32637D44F14F620E: "Datadog, Inc. Master key (2020-09-08) <package+masterkey@datadoghq.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  9001  100  9001    0     0  10661      0 --:--:-- --:--:-- --:--:-- 10664
+gpg: key D3A80E30382E94DE: "Datadog, Inc <package@datadoghq.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+[34m
+* Installing the Datadog Agent package
+[0m
+Ign:1 https://apt.datadoghq.com stable InRelease
+Hit:2 https://apt.datadoghq.com stable Release
+Reading package lists...
+  [33mInstalling package(s): datadog-agent datadog-signing-keys
+[0m
+Reading package lists...
+Building dependency tree...
+Reading state information...
+datadog-signing-keys is already the newest version (1:1.3.1-1).
+The following packages will be upgraded:
+  datadog-agent
+1 upgraded, 0 newly installed, 0 to remove and 43 not upgraded.
+Need to get 279 MB of archives.
+After this operation, 22.9 MB of additional disk space will be used.
+Get:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1 [279 MB]
+Ign:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1
+Get:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1 [279 MB]
+Ign:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1
+Get:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1 [279 MB]
+Ign:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1
+Get:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1 [279 MB]
+Err:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.56.0-1
+  Connection timed out [IP: 108.139.200.82 443]
+W: --force-yes is deprecated, use one of the options starting with --allow instead.
+E: Failed to fetch https://apt.datadoghq.com/pool/d/da/datadog-agent_7.56.0-1_amd64.deb  Connection timed out [IP: 108.139.200.82 443]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+[31mERROR
+Failed to install the datadog-agent package, sometimes it may be
+due to another APT source failing. See the logs above to
+determine the cause.
+If the cause is unclear, please contact Datadog support.
+*****
+
+It looks like you hit an issue when trying to install the Datadog Agent.
+
+Troubleshooting and basic usage information for the Datadog Agent are available at:
+
+    https://docs.datadoghq.com/agent/basic_agent_usage/
+[0m
+Do you want to send a failure report to Datadog (including ddagent-install.log)? (y/[n]) 
+If you are still having problems, please send an email to support@datadoghq.com
+with the contents of ddagent-install.log and any information you think would be
+useful and we will do our very best to help you solve your problem.
