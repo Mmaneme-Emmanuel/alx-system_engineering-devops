@@ -8,16 +8,34 @@ import requests
 
 def top_ten(subreddit):
     """
-    Construct the URL for the subreddit's hot posts in JSON format
+    Print the titles of the top 10 hot posts for a given subreddit.
     """
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {'user-agent': 'request'}
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    headers = {'User-Agent': 'request'}
+    try:
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        # Check for a valid response that contains JSON
+        if response.status_code != 200:
+            print("None")
+            return
 
-    if response.status_code != 200:
+        # Ensure the response is JSON
+        try:
+            data = response.json().get("data", {}).get("children", [])
+        except ValueError:
+            print("None")
+            return
+
+        if not data:
+            print("None")
+            return
+
+        for post in data[:10]:
+            title = post.get("data", {}).get("title")
+            if title:
+                print(title)
+            else:
+                print("None")
+
+    except requests.exceptions.RequestException:
         print("None")
-        return
-
-    data = response.json().get("data").get("children")
-    top_10_posts = "\n".join(post.get("data").get("title") for post in data)
-    print(top_10_posts)
